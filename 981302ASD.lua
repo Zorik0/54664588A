@@ -110,7 +110,8 @@ SubmitButton.MouseButton1Click:Connect(function()
     local key = game:HttpGet("https://pastebin.com/raw/bRcVZwNf")
     local inputText = TextBox.Text
     if inputText == key then
-        print('it works')
-    else print('incorrect key') end -- Added the missing 'end' here
+        print('Key Verified')
+        Frame:Destroy()
+    else print('Incorrect key') end -- Added the missing 'end' here
 print(inputText)
 end)
