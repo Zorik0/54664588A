@@ -111,7 +111,7 @@ SubmitButton.MouseButton1Click:Connect(function()
     local inputText = TextBox.Text
     if inputText == key then
         print('Key Verified')
-        Frame:Destroy()
+        ScreenGui:Destroy()
     else print('Incorrect key') end -- Added the missing 'end' here
 print(inputText)
 end)
