@@ -60,6 +60,17 @@ Window:Notify({
 })
 
 
+local localPlayer = game.Players.LocalPlayer
+workspace.Tycoons[localPlayer.Name].Auxiliary.Shop:Destroy()
+workspace.Tycoons[localPlayer.Name].Auxiliary["2X"]:Destroy()
+workspace.Tycoons[localPlayer.Name].Auxiliary.Infinity:Destroy()
+workspace.Tycoons[localPlayer.Name].Auxiliary.Meteor:Destroy()
+workspace.Tycoons[localPlayer.Name].Auxiliary.Crate:Destroy()
+workspace.Tycoons[localPlayer.Name].Auxiliary.Size:Destroy()
+workspace.Tycoons[localPlayer.Name].Auxiliary.Speed:Destroy()
+workspace.Tycoons[localPlayer.Name].Auxiliary.Health:Destroy()
+workspace.Tycoons[localPlayer.Name].Auxiliary.AllPowers:Destroy()
+
 -- GLOBAL SETTINGS ================================================================================
 local Global_Setting = Window:GlobalSetting({
     Name = "Moderator Join Alerts",
