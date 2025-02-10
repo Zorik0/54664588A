@@ -117,7 +117,7 @@ Section1:Toggle({
                     if localPlayer and localPlayer.Character and localPlayer.Character:FindFirstChild("HumanoidRootPart") then
                         local collectorPath = workspace.Tycoons:FindFirstChild(localPlayer.Name)
                         if collectorPath and collectorPath:FindFirstChild("Auxiliary") and collectorPath.Auxiliary:FindFirstChild("Collector") and collectorPath.Auxiliary.Collector:FindFirstChild("Collect") then
-                            collectorPath.Auxiliary.Collector.Collect.CFrame = localPlayer.Character.HumanoidRootPart.CFrame
+                            localPlayer.Character.HumanoidRootPart.CFrame = collectorPath.Auxiliary.Collector.Collect.CFrame
                         end
                     end
                     task.wait(0.1) -- Adjust the delay as needed
@@ -131,3 +131,4 @@ Section1:Toggle({
         })
     end
 }, "AutoCollectToggle")
+
