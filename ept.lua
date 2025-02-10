@@ -108,26 +108,24 @@ Section1:Toggle({
     Name = "Auto Collect",
     Default = false,
     Callback = function(value)
-        autoCollectEnabled = value -- Fix: Ensure toggle works correctly
-        
-        if autoCollectEnabled then
-            task.spawn(function()
-                while autoCollectEnabled do
-                    local localPlayer = game.Players.LocalPlayer
-                    if localPlayer and localPlayer.Character and localPlayer.Character:FindFirstChild("HumanoidRootPart") then
-                        local collectorPath = workspace.Tycoons:FindFirstChild(localPlayer.Name)
-                        if collectorPath and collectorPath:FindFirstChild("Auxiliary") and collectorPath.Auxiliary:FindFirstChild("Collector") and collectorPath.Auxiliary.Collector:FindFirstChild("Collect") then
-                            localPlayer.Character.HumanoidRootPart.CFrame = collectorPath.Auxiliary.Collector.Collect.CFrame
-                        end
-                    end
-                    task.wait(0.1) -- Adjust the delay as needed
-                end
-            end)
-        end
+        autoCollectEnabled = value
         
         Window:Notify({
             Title = "SoulForge",
             Description = (value and "Enabled Auto Collect" or "Disabled Auto Collect")
         })
+
+        if value then
+            task.spawn(function()
+                while autoCollectEnabled do
+                    local localPlayer = game.Players.LocalPlayer
+                    if localPlayer and localPlayer.Character and localPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                        localPlayer.Character.HumanoidRootPart.CFrame = workspace.Tycoons[localPlayer.Name].Auxiliary.Collector.Collect.CFrame
+                    end
+                    task.wait(0.1) -- Adjust this delay to avoid excessive server requests
+                end
+            end)
+        end
     end
 }, "AutoCollectToggle")
+
