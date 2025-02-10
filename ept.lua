@@ -91,14 +91,42 @@ local Tab = TabGroup:Tab({
 local Section1 = Tab:Section({
     Side = "Right"
 })
+
 Section:Toggle({
     Name = "Auto Build",
     Default = false,
     Callback = function(value)
+        autoBuildEnabled = value
+
         Window:Notify({
             Title = "SoulForge",
-            Description = (value and "Enabled " or "Disabled ") .. "Flight"
+            Description = (value and "Enabled Auto Build" or "Disabled Auto Build")
         })
+
+        if value then
+            task.spawn(function()
+                local localPlayer = game.Players.LocalPlayer
+                local character = localPlayer.Character or localPlayer.CharacterAdded:Wait()
+                local hrp = character:WaitForChild("HumanoidRootPart")
+
+                while autoBuildEnabled do
+                    local tycoon = workspace.Tycoons[localPlayer.Name]
+                    if tycoon and tycoon:FindFirstChild("Buttons") then
+                        for _, thing in ipairs(tycoon.Buttons:GetChildren()) do
+                            if thing:IsA("Folder") or thing:IsA("Model") then -- Ensure it contains Buttons
+                                for _, button in ipairs(thing:GetChildren()) do
+                                    if button:IsA("Part") or button:IsA("BasePart") then
+                                        hrp.CFrame = button.CFrame
+                                        task.wait(0.5) -- Adjust delay as needed
+                                    end
+                                end
+                            end
+                        end
+                    end
+                    task.wait(5) -- Prevents excessive looping
+                end
+            end)
+        end
     end
 }, "AutoBuildToggle")
 
@@ -122,7 +150,7 @@ Section1:Toggle({
                     if localPlayer and localPlayer.Character and localPlayer.Character:FindFirstChild("HumanoidRootPart") then
                         localPlayer.Character.HumanoidRootPart.CFrame = workspace.Tycoons[localPlayer.Name].Auxiliary.Collector.Collect.CFrame
                     end
-                    task.wait(0.1) -- Adjust this delay to avoid excessive server requests
+                    task.wait(1) -- Adjust this delay to avoid excessive server requests
                 end
             end)
         end
