@@ -108,7 +108,7 @@ Section1:Toggle({
     Name = "Auto Collect",
     Default = false,
     Callback = function(value)
-        autoCollectEnabled = value
+        autoCollectEnabled = not value
         
         if autoCollectEnabled then
             task.spawn(function()
@@ -127,7 +127,7 @@ Section1:Toggle({
         
         Window:Notify({
             Title = "SoulForge",
-            Description = (value and "Enabled Auto Collect" or "Disabled Auto Collect")
+            Description = (value and "Disabled Auto Collect" or "Enabled Auto Collect")
         })
     end
 }, "AutoCollectToggle")
