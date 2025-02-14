@@ -1,3 +1,4 @@
+
 -- Raptor Hub
 -- Powered by SoulForge 
 
@@ -89,16 +90,16 @@ local Global_Setting = Window:GlobalSetting({
 
 --TABS ================================================================================
 local TabGroup = Window:TabGroup()
-local Tab = TabGroup:Tab({
+local Tab1 = TabGroup:Tab({
     Name = 'Auto Farming'
 
   })
 
-  local Section = Tab:Section({
+  local Section = Tab1:Section({
     Side = "Left"
 })
 
-local Section1 = Tab:Section({
+local Section1 = Tab1:Section({
     Side = "Right"
 })
 
@@ -166,3 +167,18 @@ Section1:Toggle({
         end
     end
 }, "AutoCollectToggle")
+
+local Tab2 = TabGroup:Tab({
+    Name = "GamePlay",
+  })
+
+local Section3 = Tab2:Section({
+    Side = "Left"
+})
+
+Section3.MainSection1:Button({
+	Name = "Kill All",
+	Callback = function()
+		print("Killed everyone.")
+	end,
+})
