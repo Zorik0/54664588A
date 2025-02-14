@@ -1,4 +1,3 @@
-
 -- Raptor Hub
 -- Powered by SoulForge 
 
@@ -167,4 +166,3 @@ Section1:Toggle({
         end
     end
 }, "AutoCollectToggle")
-
