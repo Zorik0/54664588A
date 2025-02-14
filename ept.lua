@@ -1,10 +1,8 @@
-
 -- Raptor Hub
 -- Powered by SoulForge 
 
 -- Fetch Key 
 key = game:HttpGet("https://pastebin.com/raw/bRcVZwNf")
-
 
 -- BUTTON TO MAXIMIZE THE GUI
 local Players = game:GetService("Players")
@@ -59,7 +57,6 @@ Window:Notify({
     Lifetime = 10
 })
 
-
 local localPlayer = game.Players.LocalPlayer
 workspace.Tycoons[localPlayer.Name].Auxiliary.Shop:Destroy()
 workspace.Tycoons[localPlayer.Name].Auxiliary["2X"]:Destroy()
@@ -92,10 +89,9 @@ local Global_Setting = Window:GlobalSetting({
 local TabGroup = Window:TabGroup()
 local Tab = TabGroup:Tab({
     Name = 'Auto Farming'
+})
 
-  })
-
-  local Section = Tab:Section({
+local Section = Tab:Section({
     Side = "Left"
 })
 
@@ -168,3 +164,27 @@ Section1:Toggle({
     end
 }, "AutoCollectToggle")
 
+-- NEW TAB: Extra Features
+local ExtraTab = TabGroup:Tab({
+    Name = 'Extra Features'
+})
+
+local ExtraSection = ExtraTab:Section({
+    Side = "Left"
+})
+
+local ExtraSection1 = ExtraTab:Section({
+    Side = "Right"
+})
+
+-- Example Toggle for Extra Features
+ExtraSection:Toggle({
+    Name = "Example Feature",
+    Default = false,
+    Callback = function(value)
+        Window:Notify({
+            Title = "SoulForge",
+            Description = (value and "Enabled Example Feature" or "Disabled Example Feature")
+        })
+    end
+}, "ExampleFeatureToggle")
