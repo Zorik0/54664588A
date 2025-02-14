@@ -6,10 +6,8 @@ local TextLabel = Instance.new("TextLabel")
 local TextLabel_2 = Instance.new("TextLabel")
 local KeyButton = Instance.new("TextButton")
 local SubmitButton = Instance.new("TextButton")
-
---Properties:
-
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
 
 Frame.Parent = ScreenGui
 Frame.Active = true
@@ -87,7 +85,16 @@ KeyButton.TextSize = 14.000
 KeyButton.TextWrapped = true
 KeyButton.MouseButton1Click:Connect(function()
 setclipboard(tostring("https://link-target.net/347027/soulforge-keysystem-01"))
---
+
+local NotificationHolder = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Module.Lua"))()
+local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Client.Lua"))()
+
+Notification:Notify(
+    {Title = "SoulForge Hub", Description = "Key Link Has been Copied, Open It in browser"},
+    {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
+    {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
+)
+
 end)
 
 SubmitButton.Name = "SubmitButton"
@@ -107,7 +114,28 @@ SubmitButton.MouseButton1Click:Connect(function()
     local inputText = TextBox.Text
     if inputText == key then
         print('Key Verified')
+        local NotificationHolder = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Module.Lua"))()
+        local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Client.Lua"))()
+
+        Notification:Notify(
+            {Title = "SoulForge Hub", Description = "Key Verified, Welcome to SoulForge Hub"},
+            {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
+            {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
+        )
+
         ScreenGui:Destroy()
-    else print('Incorrect key') end -- Added the missing 'end' here
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Zorik0/54664588A/refs/heads/main/Game_Finder.lua"))()
+    else 
+        print('Incorrect key') 
+        local NotificationHolder = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Module.Lua"))()
+        local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Client.Lua"))()
+
+        Notification:Notify(
+            {Title = "SoulForge Hub", Description = "Incorrect Key"},
+            {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
+            {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
+        )
+
+        end -- Added the missing 'end' here
 print(inputText)
 end)
