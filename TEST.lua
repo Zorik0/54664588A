@@ -1,169 +1,131 @@
--- Load Maclib
-local MacLib = loadstring(game:HttpGet("https://github.com/biggaboy212/Maclib/releases/latest/download/maclib.txt"))()
-local localPlayer = game.Players.LocalPlayer
-workspace.Tycoons[localPlayer.Name].Auxiliary.Shop:Destroy()
-workspace.Tycoons[localPlayer.Name].Auxiliary["2X"]:Destroy()
-workspace.Tycoons[localPlayer.Name].Auxiliary.Infinity:Destroy()
-workspace.Tycoons[localPlayer.Name].Auxiliary.Meteor:Destroy()
-workspace.Tycoons[localPlayer.Name].Auxiliary.Crate:Destroy()
-workspace.Tycoons[localPlayer.Name].Auxiliary.Size:Destroy()
-workspace.Tycoons[localPlayer.Name].Auxiliary.Speed:Destroy()
-workspace.Tycoons[localPlayer.Name].Auxiliary.Health:Destroy()
-workspace.Tycoons[localPlayer.Name].Auxiliary.AllPowers:Destroy()
-
--- Create the main window
-local Window = MacLib:Window({
-    Title = "Elemental Powers Tycoon",
-    Subtitle = "UI by Maclib",
-    Size = UDim2.fromOffset(634, 450),
-    DragStyle = 2,
-    DisabledWindowControls = {},
-    ShowUserInfo = true,
-    Keybind = Enum.KeyCode.RightControl,
-    AcrylicBlur = true,
-})
-
--- Create a Tab Group
-local TabGroup = Window:TabGroup()
-
--- Add the "Auto Build" Tab
-local AutoBuildTab = TabGroup:Tab({
-    Name = "Auto Build",
-    Image = "", -- Optional: Add an image path here if needed
-})
-
--- Add sections to the "Auto Build" Tab
-local AutoBuildSection = AutoBuildTab:Section({
-    Side = "Left",
-})
-
--- Add Toggles for "Auto Build"
-AutoBuildSection:Toggle({
-    Name = "Auto Build",
-    Default = false,
-    Callback = function(value)
-        autoBuildEnabled = value
-
-        Window:Notify({
-            Title = "SoulForge",
-            Description = (value and "Enabled Auto Build" or "Disabled Auto Build")
-        })
-
-        if value then
-            task.spawn(function()
-                local localPlayer = game.Players.LocalPlayer
-                local character = localPlayer.Character or localPlayer.CharacterAdded:Wait()
-                local hrp = character:WaitForChild("HumanoidRootPart")
-
-                while autoBuildEnabled do
-                    local tycoon = workspace.Tycoons[localPlayer.Name]
-                    if tycoon and tycoon:FindFirstChild("Buttons") then
-                        for _, thing in ipairs(tycoon.Buttons:GetChildren()) do
-                            if thing:IsA("Folder") or thing:IsA("Model") then -- Ensure it contains Buttons
-                                for _, button in ipairs(thing:GetChildren()) do
-                                    if button:IsA("Part") or button:IsA("BasePart") then
-                                        hrp.CFrame = button.CFrame
-                                        task.wait(0.5) -- Adjust delay as needed
-                                    end
-                                end
-                            end
-                        end
-                    end
-                    task.wait(5) -- Prevents excessive looping
-                end
-            end)
-        end
-    end
-}, "AutoBuildToggle")
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local TextBox = Instance.new("TextBox")
+local ImageLabel = Instance.new("ImageLabel")
+local TextLabel = Instance.new("TextLabel")
+local TextLabel_2 = Instance.new("TextLabel")
+local KeyButton = Instance.new("TextButton")
+local SubmitButton = Instance.new("TextButton")
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
 
-AutoBuildSection:Toggle({
-    Name = "Auto Collect",
-    Default = false,
-    Callback = function(value)
-        autoCollectEnabled = value
-        
-        Window:Notify({
-            Title = "SoulForge",
-            Description = (value and "Enabled Auto Collect" or "Disabled Auto Collect")
-        })
+Frame.Parent = ScreenGui
+Frame.Active = true
+Frame.Draggable = true
+Frame.BackgroundColor3 = Color3.fromRGB(46, 46, 46)
+Frame.BackgroundTransparency = 0.250
+Frame.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Frame.BorderSizePixel = 0
+Frame.Position = UDim2.new(0.378580332, 0, 0.363636374, 0)
+Frame.Size = UDim2.new(0, 390, 0, 251)
 
-        if value then
-            task.spawn(function()
-                while autoCollectEnabled do
-                    local localPlayer = game.Players.LocalPlayer
-                    if localPlayer and localPlayer.Character and localPlayer.Character:FindFirstChild("HumanoidRootPart") then
-                        localPlayer.Character.HumanoidRootPart.CFrame = workspace.Tycoons[localPlayer.Name].Auxiliary.Collector.Collect.CFrame
-                    end
-                    task.wait(1) -- Adjust this delay to avoid excessive server requests
-                end
-            end)
-        end
-    end
-}, "AutoCollectToggle")
+TextBox.Parent = Frame
+TextBox.BackgroundColor3 = Color3.fromRGB(46, 46, 46)
+TextBox.BackgroundTransparency = 0.200
+TextBox.BorderColor3 = Color3.fromRGB(255, 255, 255)
+TextBox.BorderSizePixel = 2
+TextBox.Position = UDim2.new(0.247989908, 0, 0.486486495, 0)
+TextBox.Size = UDim2.new(0, 200, 0, 50)
+TextBox.Font = Enum.Font.Gotham
+TextBox.Text = ""
+TextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextBox.TextSize = 30.000
+TextBox.TextWrapped = true
+TextBox.PlaceholderText = 'Paste Key Here'
+wait(2)
+TextBox:CaptureFocus()
 
--- Add the "GamePlay" Tab
-local GamePlayTab = TabGroup:Tab({
-    Name = "GamePlay",
-    Image = "", -- Optional: Add an image path here if needed
-})
+ImageLabel.Parent = Frame
+ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ImageLabel.BackgroundTransparency = 1.000
+ImageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ImageLabel.BorderSizePixel = 0
+ImageLabel.Position = UDim2.new(0.370888114, 0, -0.198044851, 0)
+ImageLabel.SelectionImageObject = Frame
+ImageLabel.Size = UDim2.new(0, 100, 0, 100)
+ImageLabel.Image = "rbxassetid://74914034808156"
 
--- Add sections to the "GamePlay" Tab
-local GamePlaySection = GamePlayTab:Section({
-    Side = "Left",
-})
+TextLabel.Parent = Frame
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.BorderSizePixel = 0
+TextLabel.Position = UDim2.new(0.247989908, 0, 0.137592211, 0)
+TextLabel.Size = UDim2.new(0, 200, 0, 50)
+TextLabel.Font = Enum.Font.Unknown
+TextLabel.Text = "SoulForge Hub"
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14.000
+TextLabel.TextWrapped = true
 
--- Add Button for "Safe Spot"
-GamePlaySection:Button({
-    Name = "Safe Spot",
-    Callback = function()
-        print("Safe Spot Button Clicked")
-        -- Add your logic here for Safe Spot
-    end,
-})
+TextLabel_2.Parent = Frame
+TextLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.BackgroundTransparency = 1.000
+TextLabel_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_2.BorderSizePixel = 0
+TextLabel_2.Position = UDim2.new(0.121288747, 0, 0.387387395, 0)
+TextLabel_2.Size = UDim2.new(0, 200, 0, 22)
+TextLabel_2.Font = Enum.Font.Michroma
+TextLabel_2.Text = "Paste Key here"
+TextLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.TextSize = 14.000
 
--- Add Toggle for "Auto Safe Spot"
-GamePlaySection:Toggle({
-    Name = "Auto Safe Spot",
-    Default = false,
-    Callback = function(State)
-        print("Auto Safe Spot:", State and "Enabled" or "Disabled")
-        -- Add your logic here for Auto Safe Spot
-    end,
-})
+KeyButton.Name = "KeyButton"
+KeyButton.Parent = Frame
+KeyButton.BackgroundColor3 = Color3.fromRGB(33, 33, 33)
+KeyButton.BorderColor3 = Color3.fromRGB(159, 159, 159)
+KeyButton.Position = UDim2.new(0.597439051, 0, 0.770065606, 0)
+KeyButton.Size = UDim2.new(0, 63, 0, 34)
+KeyButton.Font = Enum.Font.Unknown
+KeyButton.Text = "GET KEY"
+KeyButton.TextColor3 = Color3.fromRGB(170, 255, 0)
+KeyButton.TextScaled = true
+KeyButton.TextSize = 14.000
+KeyButton.TextWrapped = true
+KeyButton.MouseButton1Click:Connect(function()
+setclipboard(tostring("https://link-target.net/347027/soulforge-keysystem-01"))
 
--- Add the "Misc" Tab
-local MiscTab = TabGroup:Tab({
-    Name = "Misc",
-    Image = "", -- Optional: Add an image path here if needed
-})
+local NotificationHolder = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Module.Lua"))()
+local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Client.Lua"))()
 
--- Add sections to the "Misc" Tab
-local MiscSection = MiscTab:Section({
-    Side = "Left",
-})
+Notification:Notify(
+    {Title = "SoulForge Hub", Description = "Key Link Has been Copied, Open It in browser"},
+    {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "option"},
+    {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84), Callback = function(State) print(tostring(State)) end}
+)
+wait(1)
+Notification:Notify(
+    {Title = "SoulForge Hub", Description = "Key Link Has been Copied, Open It in browser"},
+    {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
+    {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
+)
+wait(1)
+Notification:Notify(
+    {Title = "SoulForge Hub", Description = "Key Link Has been Copied, Open It in browser"},
+    {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "default"}
+)
 
--- Add Buttons for "Misc" Tab
-MiscSection:Button({
-    Name = "Player Speed",
-    Callback = function()
-        print("Player Speed Button Clicked")
-        -- Add your logic here for Player Speed
-    end,
-})
+end)
 
-MiscSection:Button({
-    Name = "Player Jumps",
-    Callback = function()
-        print("Player Jumps Button Clicked")
-        -- Add your logic here for Player Jumps
-    end,
-})
-
-MiscSection:Button({
-    Name = "HitBox Expand",
-    Callback = function()
-        print("HitBox Expand Button Clicked")
-        -- Add your logic here for HitBox Expand
-    end,
-})
+SubmitButton.Name = "SubmitButton"
+SubmitButton.Parent = Frame
+SubmitButton.BackgroundColor3 = Color3.fromRGB(33, 33, 33)
+SubmitButton.BorderColor3 = Color3.fromRGB(159, 159, 159)
+SubmitButton.Position = UDim2.new(0.246156976, 0, 0.770065606, 0)
+SubmitButton.Size = UDim2.new(0, 128, 0, 34)
+SubmitButton.Font = Enum.Font.Unknown
+SubmitButton.Text = "SUBMIT"
+SubmitButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+SubmitButton.TextScaled = true
+SubmitButton.TextSize = 14.000
+SubmitButton.TextWrapped = true
+SubmitButton.MouseButton1Click:Connect(function()
+    local key = game:HttpGet("https://pastebin.com/raw/bRcVZwNf")
+    local inputText = TextBox.Text
+    if inputText == key then
+        print('Key Verified')
+        ScreenGui:Destroy()
+    else print('Incorrect key') end -- Added the missing 'end' here
+print(inputText)
+end)
