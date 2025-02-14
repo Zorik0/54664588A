@@ -1,62 +1,5 @@
--- SoulForge Hub
--- Ouch How dare you look at my code XD (ey have a good one it's shit anyway)
-key = game:HttpGet("https://pastebin.com/raw/bRcVZwNf")
-
-
--- BUTTON TO MAXIMIZE THE GUI
-local Players = game:GetService("Players")
-
-local player = Players.LocalPlayer
-local playerGui = player:WaitForChild("PlayerGui")
-
--- Create a ScreenGui
-local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "ImageButtonGui"
-screenGui.ResetOnSpawn = false -- Ensure it does not reset on spawn
-screenGui.Parent = playerGui
-
--- Create an ImageButton
-local imageButton = Instance.new("ImageButton")
-imageButton.Size = UDim2.new(0, 50, 0, 50) -- Size of the button
-imageButton.Position = UDim2.new(0.5, -50, 0.5, -50) -- Center of the screen
-imageButton.Image = "rbxassetid://74914034808156" -- Replace with your image asset ID
-imageButton.Draggable = true -- Make the button draggable
-imageButton.Active = true -- Ensure the button is active
-imageButton.Transparency = 1
-imageButton.Parent = screenGui
-
--- Functionality for the button
-imageButton.MouseButton1Click:Connect(function()
-    -- Send Keypress (OPEN GUI)
-    local VirtualInputManager = game:GetService("VirtualInputManager")
-
-    -- Simulate pressing the right Ctrl key
-    VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.RightControl, false, nil)
-
-    -- Simulate releasing the right Ctrl key
-    VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.RightControl, false, nil)
-end)
-
+-- Load Maclib
 local MacLib = loadstring(game:HttpGet("https://github.com/biggaboy212/Maclib/releases/latest/download/maclib.txt"))()
-local Window = MacLib:Window({
-    Title = "SoulForge Hub",
-    Subtitle = "Free | V2.01",
-    Size = UDim2.fromOffset(634, 450),
-    DragStyle = 2,
-    DisabledWindowControls = {},
-    ShowUserInfo = true,
-    Keybind = Enum.KeyCode.RightControl,
-    AcrylicBlur = true,
-})
-
--- NOTIFICATIONS ================================================================================
-Window:Notify({
-    Title = "SoulForge Hub",
-    Description = "Powered by Zoriko",
-    Lifetime = 10
-})
-
-
 local localPlayer = game.Players.LocalPlayer
 workspace.Tycoons[localPlayer.Name].Auxiliary.Shop:Destroy()
 workspace.Tycoons[localPlayer.Name].Auxiliary["2X"]:Destroy()
@@ -68,39 +11,34 @@ workspace.Tycoons[localPlayer.Name].Auxiliary.Speed:Destroy()
 workspace.Tycoons[localPlayer.Name].Auxiliary.Health:Destroy()
 workspace.Tycoons[localPlayer.Name].Auxiliary.AllPowers:Destroy()
 
--- GLOBAL SETTINGS ================================================================================
-local Global_Setting = Window:GlobalSetting({
-    Name = "Moderator Join Alerts",
-    Default = false,
-    Callback = function(State)
-        print("Moderator Join Alerts " .. (State and "Enabled" or "Disabled"))
-    end,
+-- Create the main window
+local Window = MacLib:Window({
+    Title = "Elemental Powers Tycoon",
+    Subtitle = "UI by Maclib",
+    Size = UDim2.fromOffset(634, 450),
+    DragStyle = 2,
+    DisabledWindowControls = {},
+    ShowUserInfo = true,
+    Keybind = Enum.KeyCode.RightControl,
+    AcrylicBlur = true,
 })
 
-local Global_Setting = Window:GlobalSetting({
-    Name = "Moderator Join Alerts",
-    Default = false,
-    Callback = function(State)
-        print("Moderator Join Alerts " .. (State and "Enabled" or "Disabled"))
-    end,
-})
-
---TABS ================================================================================
+-- Create a Tab Group
 local TabGroup = Window:TabGroup()
-local Tab = TabGroup:Tab({
-    Name = 'Auto Farming'
 
-  })
-
-  local Section = Tab:Section({
-    Side = "Left"
+-- Add the "Auto Build" Tab
+local AutoBuildTab = TabGroup:Tab({
+    Name = "Auto Build",
+    Image = "", -- Optional: Add an image path here if needed
 })
 
-local Section1 = Tab:Section({
-    Side = "Right"
+-- Add sections to the "Auto Build" Tab
+local AutoBuildSection = AutoBuildTab:Section({
+    Side = "Left",
 })
 
-Section:Toggle({
+-- Add Toggles for "Auto Build"
+AutoBuildSection:Toggle({
     Name = "Auto Build",
     Default = false,
     Callback = function(value)
@@ -138,9 +76,8 @@ Section:Toggle({
     end
 }, "AutoBuildToggle")
 
-local autoCollectEnabled = false
 
-Section1:Toggle({
+AutoBuildSection:Toggle({
     Name = "Auto Collect",
     Default = false,
     Callback = function(value)
@@ -164,3 +101,69 @@ Section1:Toggle({
         end
     end
 }, "AutoCollectToggle")
+
+-- Add the "GamePlay" Tab
+local GamePlayTab = TabGroup:Tab({
+    Name = "GamePlay",
+    Image = "", -- Optional: Add an image path here if needed
+})
+
+-- Add sections to the "GamePlay" Tab
+local GamePlaySection = GamePlayTab:Section({
+    Side = "Left",
+})
+
+-- Add Button for "Safe Spot"
+GamePlaySection:Button({
+    Name = "Safe Spot",
+    Callback = function()
+        print("Safe Spot Button Clicked")
+        -- Add your logic here for Safe Spot
+    end,
+})
+
+-- Add Toggle for "Auto Safe Spot"
+GamePlaySection:Toggle({
+    Name = "Auto Safe Spot",
+    Default = false,
+    Callback = function(State)
+        print("Auto Safe Spot:", State and "Enabled" or "Disabled")
+        -- Add your logic here for Auto Safe Spot
+    end,
+})
+
+-- Add the "Misc" Tab
+local MiscTab = TabGroup:Tab({
+    Name = "Misc",
+    Image = "", -- Optional: Add an image path here if needed
+})
+
+-- Add sections to the "Misc" Tab
+local MiscSection = MiscTab:Section({
+    Side = "Left",
+})
+
+-- Add Buttons for "Misc" Tab
+MiscSection:Button({
+    Name = "Player Speed",
+    Callback = function()
+        print("Player Speed Button Clicked")
+        -- Add your logic here for Player Speed
+    end,
+})
+
+MiscSection:Button({
+    Name = "Player Jumps",
+    Callback = function()
+        print("Player Jumps Button Clicked")
+        -- Add your logic here for Player Jumps
+    end,
+})
+
+MiscSection:Button({
+    Name = "HitBox Expand",
+    Callback = function()
+        print("HitBox Expand Button Clicked")
+        -- Add your logic here for HitBox Expand
+    end,
+})
