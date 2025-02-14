@@ -8,7 +8,7 @@ local KeyButton = Instance.new("TextButton")
 local SubmitButton = Instance.new("TextButton")
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
---
+
 Frame.Parent = ScreenGui
 Frame.Active = true
 Frame.Draggable = true
@@ -114,7 +114,29 @@ SubmitButton.MouseButton1Click:Connect(function()
     local inputText = TextBox.Text
     if inputText == key then
         print('Key Verified')
+        local NotificationHolder = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Module.Lua"))()
+        local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Client.Lua"))()
+
+        Notification:Notify(
+            {Title = "SoulForge Hub", Description = "Key Verified, Welcome to SoulForge Hub"},
+            {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
+            {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
+        )
+
         ScreenGui:Destroy()
-    else print('Incorrect key') end -- Added the missing 'end' here
+        wait(2)
+
+    else 
+        print('Incorrect key') 
+        local NotificationHolder = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Module.Lua"))()
+        local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Client.Lua"))()
+
+        Notification:Notify(
+            {Title = "SoulForge Hub", Description = "Incorrect Key"},
+            {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "image"},
+            {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84)}
+        )
+
+        end -- Added the missing 'end' here
 print(inputText)
 end)
