@@ -1,8 +1,3 @@
--- Gui to Lua
--- Version: 3.2
-
--- Instances:
-
 local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local TextBox = Instance.new("TextBox")
@@ -91,7 +86,8 @@ KeyButton.TextScaled = true
 KeyButton.TextSize = 14.000
 KeyButton.TextWrapped = true
 KeyButton.MouseButton1Click:Connect(function()
---script here
+setclipboard(tostring("https://link-target.net/347027/soulforge-keysystem-01"))
+--
 end)
 
 SubmitButton.Name = "SubmitButton"
