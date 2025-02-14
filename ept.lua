@@ -168,17 +168,18 @@ Section1:Toggle({
     end
 }, "AutoCollectToggle")
 
+-- Tab 2: GamePlay
 local Tab2 = TabGroup:Tab({
-    Name = "GamePlay",
-  })
+    Name = "GamePlay"
+})
 
 local Section3 = Tab2:Section({
     Side = "Left"
 })
 
-Section3.MainSection1:Button({
-	Name = "Kill All",
-	Callback = function()
-		print("Killed everyone.")
-	end,
+Section3:Button({
+    Name = "Kill All",
+    Callback = function()
+        print("Killed everyone.")
+    end
 })
