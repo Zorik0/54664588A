@@ -1,8 +1,5 @@
-
--- Raptor Hub
--- Powered by SoulForge 
-
--- Fetch Key 
+-- SoulForge Hub
+-- Ouch How dare you look at my code XD (ey have a good one it's shit anyway)
 key = game:HttpGet("https://pastebin.com/raw/bRcVZwNf")
 
 
@@ -90,16 +87,16 @@ local Global_Setting = Window:GlobalSetting({
 
 --TABS ================================================================================
 local TabGroup = Window:TabGroup()
-local Tab1 = TabGroup:Tab({
+local Tab = TabGroup:Tab({
     Name = 'Auto Farming'
 
   })
 
-  local Section = Tab1:Section({
+  local Section = Tab:Section({
     Side = "Left"
 })
 
-local Section1 = Tab1:Section({
+local Section1 = Tab:Section({
     Side = "Right"
 })
 
@@ -167,19 +164,3 @@ Section1:Toggle({
         end
     end
 }, "AutoCollectToggle")
-
--- Tab 2: GamePlay
-local Tab2 = TabGroup:Tab({
-    Name = "GamePlay"
-})
-
-local Section3 = Tab2:Section({
-    Side = "Left"
-})
-
-Section3:Button({
-    Name = "Kill All",
-    Callback = function()
-        print("Killed everyone.")
-    end
-})
